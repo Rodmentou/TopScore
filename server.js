@@ -21,9 +21,36 @@ app.all('*', function(req, res, next) {
   next();
 });
 
+var players = [];
+
+
+
 io.on('connection', function(socket){
-	console.log("A user has connected to me!");
+
+ 	socket.on('add player', function (playerName) {
+	    socket.player = {};
+	    var player = {
+	    	name: playerName,
+	    	hp: 100,
+	    	exp: 0,
+	    	gold: 20,
+	    	level: 1,
+	    	atk: 10
+	    };
+	    players.push(player);
+
+	    socket.emit('player:logged', player);
+	    console.log(players);
+		if (players.length > 0){
+			io.emit('players', players);
+		};
+  	});
+
 });
+
+
+
+
 
 server.listen(port, function () {
 	console.log('Server running in ' + env + ' at ' + port + '.');
