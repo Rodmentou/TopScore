@@ -1,0 +1,31 @@
+{
+  "name": "top_score",
+  "version": "0.0.1",
+  "description": "Socket.io and Angular real time learning project.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rodmentou/TopScore.git"
+  },
+  "keywords": [
+    "angular.js",
+    "node.js",
+    "socket.io"
+  ],
+  "author": "Rodmentou",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rodmentou/TopScore/issues"
+  },
+  "homepage": "https://github.com/Rodmentou/TopScore#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "morgan": "^1.6.1",
+    "nodemon": "^1.5.0",
+    "socket.io": "^1.3.6"
+  }
+}
