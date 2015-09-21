@@ -1,9 +1,20 @@
+<div>
+	<b>{{me.name}}</b>
 
-<input type='text' ng-model='playerName' placeholder='Name'></input> 
-<button class='btn btn-default' ng-click='login(playerName)'>Log in </button>
+
+	<br><br><br><br>
+</div>
+
+
+<div ng-if='!connected'>
+	<input type='text' ng-model='playerName' placeholder='Name'></input> 
+<button class='btn btn-primary' ng-click='login(playerName)'>Log in </button>
+</div>
+
 
 
 <table class='table table-hover' ng-if='connected'>
+
     <thead>
     <tr>
         <th>Player</th>
@@ -20,7 +31,7 @@
       	<td> {{player.hp }}</td>
       	<td> {{player.atk }}</td>
       	<td> {{player.gold }}</td>
-        <td><button class="btn btn-danger" ng-click='attackPlayer()'>Attack!</button></td>
+        <td><button class="btn btn-danger" ng-click='attackPlayer(player)'>Attack!</button></td>
       </tr> 
     </tbody>
 </table>

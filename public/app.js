@@ -49,9 +49,35 @@ app.controller('PlayerController', function ($scope, socket) {
 
 	};
 
+	$scope.changeMap = function (mapID){
 
-	$scope.attackPlayer = function () {
-		alert("sUCH a Violent peRSON!");
+	};
+
+	$scope.attackMonster = function (monsterID) {
+
+	};
+
+
+	$scope.attackPlayer = function (player) {
+		if ($scope.lastAttackTime){
+			var attackCoolDown = Date.now() - $scope.lastAttackTime;
+		} else {
+			var attackCoolDown = 5000;
+		};
+
+
+		if(player.playerName == $scope.me.name) {
+			alert("You cant attack yourself!");
+		} else if (attackCoolDown < 5000){
+			alert("You need to wait " + (5 - attackCoolDown/1000) + " seconds.");
+		} else {
+			$scope.lastAttackTime = Date.now();
+			var players = {};
+			players.atk = $scope.me;
+			players.def = player;
+			socket.emit('attack player', players);
+			alert("Atacked");
+		};
 	};
 
 
@@ -65,9 +91,13 @@ app.controller('PlayerController', function ($scope, socket) {
 	});
 
 	socket.on('players', function (players){
-		console.log($scope.players);
 		$scope.players = players;
-			
+		for(var i=0; i < players.length; i++){
+  			if (players[i].name == $scope.me.name){
+  				console.log(players[i]);
+  				$scope.me = players[i];
+  			};
+  		};
 	});
 
 
@@ -82,6 +112,6 @@ app.config( function ($routeProvider){
 			controller: 'PlayerController',
 			templateUrl: '/partials/player.html'
 		})
-		.otherwise( { redirectTo: '/'});
+		.otherwise( { redirectTo: '/play'});
 });
 
